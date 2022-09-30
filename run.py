@@ -23,4 +23,10 @@ sales = SHEET.worksheet('sales')
 
 data = sales.get_all_values()
 
+surplussheet = SHEET.worksheet('surplus')
+
+surplusdata = surplussheet.get_all_values()
+
 print(data)
+print("--------------------")
+print(surplusdata)
