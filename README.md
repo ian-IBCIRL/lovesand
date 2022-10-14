@@ -15,6 +15,10 @@ The deployed version is here https://ib-sandwich.herokuapp.com/
 * If not using our Heroku deployed environment, you will need your own creds.json to access your own google spreadsheet.
 * Do not edit any of the other files or your code may not deploy properly
 
+## Bugs fixed
+* fixed pylint warnings about trailing spaces, space after # in comments, and e variable in except statment (had to make it a longer lower case variable name)
+* also fixed pylint error if using space between print command and opening bracket i.e. print ("test") is incorrect - should be print("test") with no space.
+
 ## Creating the Heroku app
 
 When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
