@@ -18,6 +18,11 @@ The deployed version is here https://ib-sandwich.herokuapp.com/
 ## Bugs fixed
 * fixed pylint warnings about trailing spaces, space after # in comments, and e variable in except statment (had to make it a longer lower case variable name)
 * also fixed pylint error if using space between print command and opening bracket i.e. print ("test") is incorrect - should be print("test") with no space.
+* fixed .gitpod.yml problems by adding the following lines to vscode: extensions: section of .gitpod.yml file
+    - ms-toolsai.jupyter
+    - ms-toolsai.jupyter-keymap
+    - ms-toolsai.jupyter-renderers
+    
 
 ## Creating the Heroku app
 
