@@ -1,24 +1,24 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-print ("Hello World")
-print ("Hello World2") 
-print ("Hello World3") 
-
 import gspread
 from google.oauth2.service_account import Credentials
+
+print("Hello World")
+print("Hello World2")
+print("Hello World3")
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
-    ]
+]
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
-#open the google sheet 
+# open the google sheet
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
 # access the sales tab of the google sheet
@@ -33,15 +33,15 @@ surplussheet = SHEET.worksheet('surplus')
 # get the data from the surplus sheet/tab
 surplusdata = surplussheet.get_all_values()
 
-#print the sales data obtained from the sales sheet of the workbook
+# print the sales data obtained from the sales sheet of the workbook
 print(salesdata)
 print("--------------------")
 
-#print the surplus data obtained from the surplus sheet of the workbook
+# print the surplus data obtained from the surplus sheet of the workbook
 print(surplusdata)
 
 
-#function to get sales figures from the users
+# function to get sales figures from the users
 def get_sales_data():
     """
     Get sales figures input from the user.
@@ -55,7 +55,8 @@ def get_sales_data():
     sales_data = data_str.split(",")
     validate_data(sales_data)
 
-#function to validate data input to check it meets specification
+
+# function to validate data input to check it meets specification
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
@@ -63,13 +64,15 @@ def validate_data(values):
     or if there aren't exactly 6 values.
     """
     try:
-        [int(value) for value in values]
+        check_values = [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(
                 f"Exactly 6 values required, you provided {len(values)}"
+                f"{check_values}"
             )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+    except ValueError as errorv:
+        print(f"Invalid data: {errorv}, please try again.\n")
 
-#call the get sales data function defined above
+
+# call the get sales data function defined above
 get_sales_data()
