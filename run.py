@@ -17,21 +17,31 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+
+#open the google sheet 
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
+# access the sales tab of the google sheet
 sales = SHEET.worksheet('sales')
 
-data = sales.get_all_values()
+# get the google sheet data from the sales tab/worksheet
+salesdata = sales.get_all_values()
 
+# access the surplus sheet
 surplussheet = SHEET.worksheet('surplus')
 
+# get the data from the surplus sheet/tab
 surplusdata = surplussheet.get_all_values()
 
-print(data)
+#print the sales data obtained from the sales sheet of the workbook
+print(salesdata)
 print("--------------------")
+
+#print the surplus data obtained from the surplus sheet of the workbook
 print(surplusdata)
 
 
+#function to get sales figures from the users
 def get_sales_data():
     """
     Get sales figures input from the user.
@@ -45,7 +55,7 @@ def get_sales_data():
     sales_data = data_str.split(",")
     validate_data(sales_data)
 
-
+#function to validate data input to check it meets specification
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
@@ -61,6 +71,5 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
 
-
-
+#call the get sales data function defined above
 get_sales_data()
