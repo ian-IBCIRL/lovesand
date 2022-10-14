@@ -1,6 +1,6 @@
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome ian-IBCIRL,
+Welcome to my python readme for lovesandwiches,
 
 This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
 
@@ -8,6 +8,8 @@ This is the Code Institute student template for deploying your third portfolio p
 
 * Your code must be placed in the `run.py` file
 * Your dependencies must be placed in the `requirements.txt` file
+* You will need to `pip3 install gspread` to be able to import gspread to access your google sheet from the python code
+* You will need your own creds.json to access your own google spreadsheet.
 * Do not edit any of the other files or your code may not deploy properly
 
 ## Creating the Heroku app
