@@ -2,7 +2,8 @@
 
 Welcome to my python readme for lovesandwiches,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+This is the Code Institute student template for deploying my third portfolio project, the Python command-line project. 
+The last update to this file was: **Oct 14, 2022**
 
 The deployed version is here https://ib-sandwich.herokuapp.com/ 
 
