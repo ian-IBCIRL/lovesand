@@ -7,9 +7,9 @@ This is the Code Institute student template for deploying your third portfolio p
 ## Reminders
 
 * Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* You will need to `pip3 install gspread` to be able to import gspread to access your google sheet from the python code
-* You will need your own creds.json to access your own google spreadsheet.
+* Your dependencies must be placed in the `requirements.txt` file using pip3 freeze and directing the output or copying to requirements.txt
+* If not using our requirements.txt, you will need to `pip3 install gspread` to be able to import gspread to access your google sheet from the python code
+* If not using our Heroku deployed environment, you will need your own creds.json to access your own google spreadsheet.
 * Do not edit any of the other files or your code may not deploy properly
 
 ## Creating the Heroku app
