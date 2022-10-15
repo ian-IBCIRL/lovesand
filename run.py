@@ -148,10 +148,10 @@ def calculate_surplus_stock(sales_row):
 
     surplus_data = []
     for stock, sales in zip(stock_str_data, sales_row):
-        print("stock: ", stock)
-        print("sales: ", sales)
+        # print("stock: ", stock)
+        # print("sales: ", sales)
         surplus = int(stock) - sales
-        print("surplus: ", surplus)
+        # print("surplus: ", surplus)
         surplus_data.append(surplus)
     print(surplus_data)
     return surplus_data
@@ -177,8 +177,8 @@ def main():
     update_worksheet(calc_surplus, "surplus")
     stock_data = (get_last_num_entries_sales(7))
     new_data = calculate_stock_data(stock_data)
-    print(new_data)
-
+    print(f"recommended orders are: {new_data}")
+    
 
 def get_last_num_entries_sales(num):
     """
@@ -192,7 +192,6 @@ def get_last_num_entries_sales(num):
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-num:])
-    pprint(columns)
     return columns
 
 
@@ -205,7 +204,7 @@ def calculate_stock_data(data):
 
     for column in data:
         int_column = [int(num) for num in column]
-        print(f"length of column is: {len(int_column)}")
+        # print(f"length of column is: {len(int_column)}")
         average = sum(int_column) / len(int_column)
         stock_num = average * 1.1
         new_stock_data.append(round(stock_num))
