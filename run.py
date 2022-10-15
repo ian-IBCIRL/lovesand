@@ -175,6 +175,9 @@ def main():
     calc_surplus = calculate_surplus_stock(sales_data)
     print(calc_surplus)
     update_worksheet(calc_surplus, "surplus")
+    stock_data = (get_last_num_entries_sales(7))
+    new_data = calculate_stock_data(stock_data)
+    print(new_data)
 
 
 def get_last_num_entries_sales(num):
@@ -213,8 +216,4 @@ def calculate_stock_data(data):
 # to run use this command line - python -c "from run import main  ; main()"
 print("Welcome to our sandwich data automation")
 # call main function
-# main()
-stock_data = (get_last_num_entries_sales(7))
-new_data = calculate_stock_data(stock_data)
-print(new_data)
-
+main()
