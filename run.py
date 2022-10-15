@@ -82,5 +82,12 @@ def validate_data(values):
 
 
 # call the get sales data function defined above
-input_sales_data = get_sales_data()
-print(f"Sales data is {input_sales_data}")
+input_data = get_sales_data()
+print(f"input data is {input_data}")
+
+# convert sales string data list to integer list
+sales_data = [int(num) for num in input_data]
+
+# print integer list
+print(f"Sales data is {sales_data}")
+
