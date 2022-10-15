@@ -1,12 +1,9 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
-
-print("Hello World")
-print("Hello World2")
-print("Hello World3")
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -21,27 +18,35 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 # open the google sheet
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
-# access the sales tab of the google sheet
-sales = SHEET.worksheet('sales')
 
-# get the google sheet data from the sales tab/worksheet
-salesdata = sales.get_all_values()
+def test_sheet_access():
+    """
+    Test sheet access
+    python -c "from run import test_sheet_access;test_sheet_access()"
+    """
 
-# access the surplus sheet
-surplussheet = SHEET.worksheet('surplus')
+    # access the sales tab of the google sheet
+    sales = SHEET.worksheet('sales')
 
-# get the data from the surplus sheet/tab
-surplusdata = surplussheet.get_all_values()
+    # get the google sheet data from the sales tab/worksheet
+    salesdata = sales.get_all_values()
 
-# print the sales data obtained from the sales sheet of the workbook
-print(salesdata)
-print("--------------------")
+    # access the surplus sheet
+    surplussheet = SHEET.worksheet('surplus')
 
-# print the surplus data obtained from the surplus sheet of the workbook
-print(surplusdata)
+    # get the data from the surplus sheet/tab
+    surplusdata = surplussheet.get_all_values()
+
+    # print the sales data obtained from the sales sheet of the workbook
+    print(salesdata)
+    print("--------------------")
+
+    # print the surplus data obtained from the surplus sheet of the workbook
+    print(surplusdata)
 
 
 # function to get sales figures from the users
+# python -c "from run import get_sales_data  ; get_sales_data()"
 def get_sales_data():
     """
     Get sales figures input from the user, until valid data received
@@ -96,10 +101,24 @@ def update_sales_worksheet(data):
         return False
 
 
+def calculate_surplus_stock(sales_rows):
+    """Calculate surplus stock
+
+    Args:
+        sales_row (_type_): sales data
+    """
+    print("Calculating Surplus Data\n")
+    print(sales_rows)
+    stock = SHEET.worksheet("stock").get_all_values()
+    pprint(stock)
+    stock_row = stock[-1]
+    print(stock_row)
+
+
 def main():
     """
     Main function to run all program functions
-    """    
+    """
     # call the get sales data function defined above
     input_data = get_sales_data()
     print(f"input string data is {input_data}")
@@ -111,7 +130,11 @@ def main():
     print(f"Sales integer data is {sales_data}")
 
     update_sales_worksheet(sales_data)
+    calculate_surplus_stock(sales_data)
 
 
+# to run use this command line - python -c "from run import main  ; main()"
+
+# print("Welcome to our sandwich data automation")
 # call main function
-main()
+# main()
