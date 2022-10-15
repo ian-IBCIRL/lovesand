@@ -177,7 +177,44 @@ def main():
     update_worksheet(calc_surplus, "surplus")
 
 
+def get_last_num_entries_sales(num):
+    """
+    Collects columns of data from sales worksheet, collecting
+    the last num (usually 5) entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+    print(f"getting last {num} entries")
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-num:])
+    pprint(columns)
+    return columns
+
+
+def calculate_stock_data(data):
+    """
+    Calculate the average stock for each item type, adding 10%
+    """
+    print("Calculating stock data...\n")
+    new_stock_data = []
+
+    for column in data:
+        int_column = [int(num) for num in column]
+        print(f"length of column is: {len(int_column)}")
+        average = sum(int_column) / len(int_column)
+        stock_num = average * 1.1
+        new_stock_data.append(round(stock_num))
+
+    return new_stock_data
+
+
 # to run use this command line - python -c "from run import main  ; main()"
 print("Welcome to our sandwich data automation")
 # call main function
-main()
+# main()
+stock_data = (get_last_num_entries_sales(7))
+new_data = calculate_stock_data(stock_data)
+print(new_data)
+
