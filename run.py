@@ -41,19 +41,24 @@ print("--------------------")
 print(surplusdata)
 
 
-# function to get sales figures from the users
+#function to get sales figures from the users
 def get_sales_data():
     """
-    Get sales figures input from the user.
+    Get sales figures input from the user, until valid data received
     """
-    print("Please enter sales data from the last market.")
-    print("Data should be six numbers, separated by commas.")
-    print("Example: 10,20,30,40,50,60\n")
 
-    data_str = input("Enter your data here: \n")
-    print(f"The data provided is {data_str}")
-    sales_data = data_str.split(",")
-    validate_data(sales_data)
+    while (True):
+        print("Please enter sales data from the last market.")
+        print("Data should be six numbers, separated by commas.")
+        print("Example: 10,20,30,40,50,60\n")
+
+        data_str = input("Enter your data here: \n")
+        print(f"\nThe data provided is {data_str}")
+        sales_data = data_str.split(",")
+        if (validate_data(sales_data)):
+            print("Data is valid!")
+            break
+    return sales_data
 
 
 # function to validate data input to check it meets specification
@@ -67,12 +72,15 @@ def validate_data(values):
         check_values = [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(
-                f"Exactly 6 values required, you provided {len(values)}"
+                f"Exactly 6 values required. \nYou provided {len(values)} values as follows: "
                 f"{check_values}"
             )
+        return True
     except ValueError as errorv:
-        print(f"Invalid data: {errorv}, please try again.\n")
+        print(f"\nInvalid data: {errorv}.\nPlease try again.\n")
+        return (False)
 
 
 # call the get sales data function defined above
-get_sales_data()
+input_sales_data = get_sales_data()
+print(f"Sales data is {input_sales_data}")
