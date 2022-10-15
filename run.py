@@ -100,6 +100,7 @@ def update_sales_worksheet(data):
         print(f"problem occured updating data.\n{errorv}")
         return False
 
+
 def update_surplus_worksheet(data):
     """
     update surplus worksheet
@@ -170,13 +171,13 @@ def main():
     # print integer list
     print(f"Sales integer data is {sales_data}")
 
-    update_worksheet(sales_data,"sales")
+    update_worksheet(sales_data, "sales")
     calc_surplus = calculate_surplus_stock(sales_data)
     print(calc_surplus)
-    update_worksheet(calc_surplus,"surplus")
+    update_worksheet(calc_surplus, "surplus")
+
 
 # to run use this command line - python -c "from run import main  ; main()"
-
 print("Welcome to our sandwich data automation")
 # call main function
 main()
