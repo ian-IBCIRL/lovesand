@@ -57,7 +57,7 @@ def get_sales_data():
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n")
 
-        data_str = input("Enter your data here: \n")
+        data_str = input("Enter your latest sales data here: \n")
         print(f"\nThe data provided is {data_str}")
         inp_sales_data = data_str.split(",")
         if validate_data(inp_sales_data):
@@ -141,7 +141,7 @@ def calculate_surplus_stock(sales_row):
     # pprint(stock_sheet)
 
     stock_str_data = stock_sheet[-1]
-    print("stock row is: ", stock_str_data)
+    print("last stock row is: ", stock_str_data)
 
     # convert stock string data list to integer list
     # stock_row = [int(num) for num in stock_str_data]
@@ -153,8 +153,40 @@ def calculate_surplus_stock(sales_row):
         surplus = int(stock) - sales
         # print("surplus: ", surplus)
         surplus_data.append(surplus)
-    print(surplus_data)
+    print(f"Surplus is: {surplus_data}")
     return surplus_data
+
+
+def calculate_stock_data(data):
+    """
+    Calculate the average stock for each item type, adding 10%
+    """
+    print("Calculating recommended stock data...\n")
+    new_stock_data = []
+
+    for column in data:
+        int_column = [int(num) for num in column]
+        # print(f"length of column is: {len(int_column)}")
+        average = sum(int_column) / len(int_column)
+        stock_num = average * 1.1
+        new_stock_data.append(round(stock_num))
+
+    return new_stock_data
+
+
+def get_last_num_entries_sales(num):
+    """
+    Collects columns of data from sales worksheet, collecting
+    the last num (usually 5) entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+    print(f"\nGetting last {num} sales entries")
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-num:])
+    return columns
 
 
 def main():
@@ -173,46 +205,15 @@ def main():
 
     update_worksheet(sales_data, "sales")
     calc_surplus = calculate_surplus_stock(sales_data)
-    print(calc_surplus)
+    # print(calc_surplus)
     update_worksheet(calc_surplus, "surplus")
     stock_data = (get_last_num_entries_sales(7))
     new_data = calculate_stock_data(stock_data)
     print(f"recommended orders are: {new_data}")
-    
-
-def get_last_num_entries_sales(num):
-    """
-    Collects columns of data from sales worksheet, collecting
-    the last num (usually 5) entries for each sandwich and returns the data
-    as a list of lists.
-    """
-    sales = SHEET.worksheet("sales")
-    print(f"getting last {num} entries")
-    columns = []
-    for ind in range(1, 7):
-        column = sales.col_values(ind)
-        columns.append(column[-num:])
-    return columns
-
-
-def calculate_stock_data(data):
-    """
-    Calculate the average stock for each item type, adding 10%
-    """
-    print("Calculating stock data...\n")
-    new_stock_data = []
-
-    for column in data:
-        int_column = [int(num) for num in column]
-        # print(f"length of column is: {len(int_column)}")
-        average = sum(int_column) / len(int_column)
-        stock_num = average * 1.1
-        new_stock_data.append(round(stock_num))
-
-    return new_stock_data
+    update_worksheet(new_data,"stock")
 
 
 # to run use this command line - python -c "from run import main  ; main()"
-print("Welcome to our sandwich data automation")
+pprint("Welcome to our sandwich data automation")
 # call main function
 main()
