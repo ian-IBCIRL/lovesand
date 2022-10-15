@@ -173,7 +173,7 @@ def main():
     update_worksheet(sales_data,"sales")
     calc_surplus = calculate_surplus_stock(sales_data)
     print(calc_surplus)
-    update_worksheet(calc_surplus."surplus")
+    update_worksheet(calc_surplus,"surplus")
 
 # to run use this command line - python -c "from run import main  ; main()"
 
