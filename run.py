@@ -136,9 +136,9 @@ def calculate_surplus_stock(sales_row):
         sales_row (_type_): sales data
     """
     print("Calculating Surplus Data\n")
-    pprint(sales_row)
+    # pprint(sales_row)
     stock_sheet = SHEET.worksheet("stock").get_all_values()
-    pprint(stock_sheet)
+    # pprint(stock_sheet)
 
     stock_str_data = stock_sheet[-1]
     print("stock row is: ", stock_str_data)
