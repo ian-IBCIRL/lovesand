@@ -96,15 +96,22 @@ def update_sales_worksheet(data):
         return False
 
 
+def main():
+    """
+    Main function to run all program functions
+    """    
+    # call the get sales data function defined above
+    input_data = get_sales_data()
+    print(f"input string data is {input_data}")
 
-# call the get sales data function defined above
-input_data = get_sales_data()
-print(f"input string data is {input_data}")
+    # convert sales string data list to integer list
+    sales_data = [int(num) for num in input_data]
 
-# convert sales string data list to integer list
-sales_data = [int(num) for num in input_data]
+    # print integer list
+    print(f"Sales integer data is {sales_data}")
 
-# print integer list
-print(f"Sales integer data is {sales_data}")
+    update_sales_worksheet(sales_data)
 
-update_sales_worksheet(sales_data)
+
+# call main function
+main()
