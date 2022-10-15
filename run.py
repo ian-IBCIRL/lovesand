@@ -101,18 +101,32 @@ def update_sales_worksheet(data):
         return False
 
 
-def calculate_surplus_stock(sales_rows):
+def calculate_surplus_stock(sales_row):
     """Calculate surplus stock
 
     Args:
         sales_row (_type_): sales data
     """
     print("Calculating Surplus Data\n")
-    print(sales_rows)
-    stock = SHEET.worksheet("stock").get_all_values()
-    pprint(stock)
-    stock_row = stock[-1]
-    print(stock_row)
+    pprint(sales_row)
+    stock_sheet = SHEET.worksheet("stock").get_all_values()
+    pprint(stock_sheet)
+
+    stock_str_data = stock_sheet[-1]
+    print("stock row is: ", stock_str_data)
+
+    # convert stock string data list to integer list
+    # stock_row = [int(num) for num in stock_str_data]
+
+    surplus_data = []
+    for stock, sales in zip(stock_str_data, sales_row):
+        print("stock: ", stock)
+        print("sales: ", sales)
+        surplus = int(stock) - sales
+        print("surplus: ", surplus)
+        surplus_data.append(surplus)
+    print(surplus_data)
+    return surplus_data
 
 
 def main():
@@ -130,8 +144,8 @@ def main():
     print(f"Sales integer data is {sales_data}")
 
     update_sales_worksheet(sales_data)
-    calculate_surplus_stock(sales_data)
-
+    calc_surplus = calculate_surplus_stock(sales_data)
+    print(calc_surplus)
 
 # to run use this command line - python -c "from run import main  ; main()"
 
