@@ -41,24 +41,24 @@ print("--------------------")
 print(surplusdata)
 
 
-#function to get sales figures from the users
+# function to get sales figures from the users
 def get_sales_data():
     """
     Get sales figures input from the user, until valid data received
     """
 
-    while (True):
+    while True:
         print("Please enter sales data from the last market.")
         print("Data should be six numbers, separated by commas.")
         print("Example: 10,20,30,40,50,60\n")
 
         data_str = input("Enter your data here: \n")
         print(f"\nThe data provided is {data_str}")
-        sales_data = data_str.split(",")
-        if (validate_data(sales_data)):
+        inp_sales_data = data_str.split(",")
+        if validate_data(inp_sales_data):
             print("Data is valid!")
             break
-    return sales_data
+    return inp_sales_data
 
 
 # function to validate data input to check it meets specification
@@ -72,22 +72,39 @@ def validate_data(values):
         check_values = [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(
-                f"Exactly 6 values required. \nYou provided {len(values)} values as follows: "
+                f"Exactly 6 values required. \n"
+                f"You provided {len(values)} values as follows: "
                 f"{check_values}"
             )
         return True
     except ValueError as errorv:
         print(f"\nInvalid data: {errorv}.\nPlease try again.\n")
-        return (False)
+        return False
+
+
+def update_sales_worksheet(data):
+    """
+    update sales worksheet
+    """
+    print("Updating Sales Data\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    try:
+        if sales_worksheet.append_row(data):
+            print("Sales data updated successfully")
+    except gspread.exceptions.APIError as errorv:
+        print(f"problem occured updating data.\n{errorv}")
+        return False
+
 
 
 # call the get sales data function defined above
 input_data = get_sales_data()
-print(f"input data is {input_data}")
+print(f"input string data is {input_data}")
 
 # convert sales string data list to integer list
 sales_data = [int(num) for num in input_data]
 
 # print integer list
-print(f"Sales data is {sales_data}")
+print(f"Sales integer data is {sales_data}")
 
+update_sales_worksheet(sales_data)
