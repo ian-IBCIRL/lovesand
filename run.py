@@ -100,6 +100,19 @@ def update_sales_worksheet(data):
         print(f"problem occured updating data.\n{errorv}")
         return False
 
+def update_surplus_worksheet(data):
+    """
+    update surplus worksheet
+    """
+    print("Updating Sales Data\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    try:
+        if surplus_worksheet.append_row(data):
+            print("Surplus data appended successfully")
+    except gspread.exceptions.APIError as errorv:
+        print(f"problem occured appending data.\n{errorv}")
+        return False
+
 
 def calculate_surplus_stock(sales_row):
     """Calculate surplus stock
@@ -146,6 +159,7 @@ def main():
     update_sales_worksheet(sales_data)
     calc_surplus = calculate_surplus_stock(sales_data)
     print(calc_surplus)
+    update_surplus_worksheet(calc_surplus)
 
 # to run use this command line - python -c "from run import main  ; main()"
 
