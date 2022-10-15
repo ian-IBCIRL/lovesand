@@ -177,6 +177,6 @@ def main():
 
 # to run use this command line - python -c "from run import main  ; main()"
 
-# print("Welcome to our sandwich data automation")
+print("Welcome to our sandwich data automation")
 # call main function
-# main()
+main()
